@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "论文术语 AI 解释",
+  "version": "0.2.9",
+  "description": "API 配置一次保存，选中术语即可将 AI 解释直接追加到高亮评论。",
+  "applications": {
+    "zotero": {
+      "id": "term-ai@local.research",
+      "strict_min_version": "10.0",
+      "strict_max_version": "10.0.*"
+    }
+  },
+  "author": "Zotero Term AI contributors"
+}

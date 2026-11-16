@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="utf-8"/><title>AI 解释 · API 配置</title>
+<style>:root{color-scheme:light}body{margin:20px;font:14px system-ui;background:#f7f9fb;color:#203344;height:calc(100vh - 40px);display:flex;flex-direction:column}h1{font-size:22px;margin:0 0 12px}main{flex:1;min-height:0;overflow:auto;padding-right:10px}label{display:block;margin:12px 0 5px}input:not([type=checkbox]),select,textarea{width:100%;box-sizing:border-box;padding:8px;border:1px solid #aabac7;border-radius:4px;font:inherit}button{padding:8px 14px;margin:8px 8px 0 0;cursor:pointer}button:disabled{cursor:wait}p{line-height:1.5;margin:8px 0}footer{border-top:1px solid #ccd5dd;padding-top:4px;flex-shrink:0}#status{white-space:pre-wrap;max-height:72px;overflow:auto;font-size:13px}#save{background:#1769aa;color:white;border:1px solid #1769aa;border-radius:4px}</style>
+<style>
+[hidden]{display:none!important}.choice-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;background:#fff;color:#203344;border:1px solid #aabac7;border-radius:5px;margin:0;padding:9px 11px;font:inherit;text-align:left;min-height:38px}.model-row{display:flex;gap:0}.model-row input{border-radius:5px 0 0 5px!important;min-width:0}.model-row button{width:42px;flex-shrink:0;border-radius:0 5px 5px 0;margin:0;border:1px solid #aabac7;border-left:0;background:#fff;color:#203344;font:inherit}.choice-panel{position:fixed;z-index:10000;background:#fff;color:#203344;border:1px solid #9aafbf;border-radius:6px;box-shadow:0 6px 20px #20334430;padding:6px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden}.choice-options{overflow:auto;min-height:0}.choice-option{display:block;width:100%;margin:0;padding:9px 10px;border:0;border-radius:3px;background:#fff;color:#203344;text-align:left;font:inherit;overflow-wrap:anywhere}.choice-option:hover,.choice-option:focus{background:#e8f2fc;outline:2px solid #79a9d5;outline-offset:-2px}.choice-option[aria-selected=true]{background:#deedfc;color:#125a96;font-weight:600}.choice-empty{padding:10px;color:#667788;font-size:13px}#modelSearch{margin-bottom:6px;flex-shrink:0}.field-help{font-size:12px;color:#52687a}button:focus-visible,input:focus-visible{outline:2px solid #1769aa;outline-offset:1px}
+</style><script src="dialog.js?v=0.2.9" defer="defer"></script></head><body>
+<h1>术语 AI 设置</h1><main>
+<section style="padding:12px;background:#eef4fa;border:1px solid #c5d5e4;border-radius:6px;margin-bottom:16px">
+<strong>解释文字显示</strong><label for="commentFont">高亮评论弹窗字号（px）</label>
+<input id="commentFont" type="number" min="10" max="32" step="1" value="16" style="width:100px"/>
+<button id="fontApply" type="button">应用字号</button><button id="fontReset" type="button">恢复默认</button>
+<p id="fontPreview" style="font-size:16px;line-height:1.6">预览：奇异值分解用于矩阵分析与降维。</p>
+<p class="field-help">默认 16 px，可输入 10–32。应用后立即生效，无需配置 API；适用于阅读器高亮评论弹窗。</p>
+<p id="fontStatus" role="status" class="field-help"></p>
+</section><p>保存一次，之后点击“AI 解释”直接写入高亮评论。仅支持 OpenAI 兼容 Chat Completions 协议，不需要 PDF2zh Python Server。</p>
+<label id="serviceLabel" for="serviceButton">Service · 服务类型</label><input id="service" type="hidden" value="openailiked"/><button id="serviceButton" class="choice-trigger" type="button" aria-haspopup="listbox" aria-controls="serviceMenu" aria-expanded="false"><span id="serviceText">OpenAI 兼容 / 自定义</span><span aria-hidden="true">▾</span></button>
+<label for="base">Base URL · 基础地址</label><input id="base" placeholder="https://你的服务/v1"/>
+<p>通常填写以 /v1 结尾的基础地址，也可粘贴完整的 /chat/completions 地址。</p>
+<label for="key">API Key · 密钥</label><input id="key" type="password" autocomplete="off" placeholder="留空保留此地址已保存密钥；免密服务可留空"/>
+<p id="keyStatus" role="status"></p>
+<label><input id="removeKey" type="checkbox"/> 删除此地址保存的密钥</label>
+<label id="modelLabel" for="model">Model · 模型名称</label><div class="model-row"><input id="model" placeholder="选择模型，或直接输入模型 ID"/><button id="modelButton" type="button" aria-label="展开模型列表" aria-haspopup="listbox" aria-controls="modelMenu" aria-expanded="false">▾</button></div><button id="modelsButton">获取模型列表</button><p id="modelHint" class="field-help">获取列表后点击右侧箭头选择模型；也可直接输入。</p>
+<label for="extra">Extra Parameters · 额外请求参数（JSON）</label><textarea id="extra" rows="3">{}</textarea>
+<p>支持 temperature、top_p、max_tokens、max_completion_tokens、frequency_penalty、presence_penalty、seed、reasoning_effort、thinking。参数必须由所选服务支持；不直接接受 PDF2zh 的 extraData 专用字段。</p>
+<label><input id="title" type="checkbox"/> 同时发送论文标题（不会发送全文或相邻段落）</label>
+<label><input id="consent" type="checkbox"/> 允许每次点击 AI 解释时向此服务发送选中文字，并将结果直接追加到评论。</label>
+<p>密钥通过 Zotero 的登录凭据管理器保存，不写入普通首选项；保护程度取决于本机配置及账户安全。不会读取 PDF2zh 已有密钥。</p>
+</main><footer><button id="testButton">测试连接</button><button id="save">保存配置</button><button id="close">关闭</button><p id="status" role="status" aria-live="polite"></p></footer>
+<div id="serviceMenu" class="choice-panel" hidden="hidden"><div id="serviceOptions" class="choice-options" role="listbox" aria-labelledby="serviceLabel"></div></div>
+<div id="modelMenu" class="choice-panel" hidden="hidden"><input id="modelSearch" placeholder="搜索模型…" aria-label="搜索模型"/><div id="modelOptions" class="choice-options" role="listbox" aria-labelledby="modelLabel"></div></div>
+</body></html>

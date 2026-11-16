@@ -1,0 +1,13 @@
+<groupbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml" onload="Zotero_Preferences.getScope('term-ai-preferences').TermAIPreferences.init()">
+  <html:h2>解释文字显示</html:h2>
+  <html:p>设置高亮评论弹窗的字号（包含 AI 解释）。默认 16 px，可输入 10–32；应用后立即生效，不修改评论内容。</html:p>
+  <html:label for="term-ai-font-size">评论字号（px）</html:label>
+  <html:input id="term-ai-font-size" type="number" min="10" max="32" step="1" style="width:100px" oninput="Zotero_Preferences.getScope('term-ai-preferences').TermAIPreferences.preview()"/>
+  <html:p id="term-ai-font-preview" style="line-height:1.6">预览：奇异值分解用于矩阵分析与降维。</html:p>
+  <hbox><button label="应用字号" oncommand="Zotero_Preferences.getScope('term-ai-preferences').TermAIPreferences.save()"/><button label="恢复默认（16 px）" oncommand="Zotero_Preferences.getScope('term-ai-preferences').TermAIPreferences.reset()"/></hbox>
+  <html:p id="term-ai-font-status" role="status"/>
+  <html:h2>论文术语 AI · API 配置</html:h2>
+  <html:p>设置服务地址、API Key 和模型，保存后即可解释 PDF 中选中的术语。</html:p>
+  <button id="term-ai-open-config" label="打开 API 配置…" oncommand="Zotero.TermAI.settings()" data-search-strings-raw="API,密钥,模型,术语,DeepSeek,OpenAI"/>
+  <html:p>配置窗口提供模型列表、连接测试和密钥管理。也可通过“工具 → 术语 AI · API 配置”打开。</html:p>
+</groupbox>
