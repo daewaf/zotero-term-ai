@@ -1,7 +1,7 @@
 # 论文术语 AI 解释（Zotero Term AI）
 
 在 Zotero PDF 阅读器中选中术语，点击「AI 解释」，将中文解释直接追加到高亮评论。使用你自己的 OpenAI 兼容 API 服务，无需额外 Python 服务。
-
+[![Zotero 中文社区 · 已收录](https://zotero-chinese.com/badges/listed.svg)](https://zotero-chinese.com/plugins/)
 ## 功能
 
 - 选区菜单提供 AI 解释；请求期间显示转圈，结束后恢复。
